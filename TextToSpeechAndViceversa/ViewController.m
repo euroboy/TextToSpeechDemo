@@ -7,15 +7,12 @@
 //
 
 #import "ViewController.h"
-#import <AVFoundation/AVFoundation.h>
+#import "SpeechManager.h"
 
 @interface ViewController ()
 
 //UI outlets
 @property (weak, nonatomic) IBOutlet UITextView *inputTextView;
-
-//Logic objects
-@property (nonatomic, strong) AVSpeechSynthesizer *synthesizer;
 
 @end
 
@@ -31,7 +28,6 @@
 #pragma mark - Initializations
 - (void) defaultInits
 {
-    self.synthesizer = [AVSpeechSynthesizer new];
     self.inputTextView.text = @"    I'm tryna put you in the worst mood, ah, \n\
     P1 cleaner than your church shoes, ah, \n\
     Milli point two just to hurt you, ah, \n\
@@ -59,26 +55,17 @@
 #pragma mark - UI Events
 - (IBAction) speakButtonPressed:(id) sender
 {
-    AVSpeechSynthesisVoice *voice = [AVSpeechSynthesisVoice voiceWithLanguage:@"ru-RU"];
-    AVSpeechUtterance *utterance = [AVSpeechUtterance speechUtteranceWithString:self.inputTextView.text];
-    utterance.voice = voice;
-    
-    [self stopPlayback];
-    [self.synthesizer speakUtterance:utterance];
+    [[SpeechManager sharedManager] speechText:self.inputTextView.text];
 }
 
 - (IBAction) stopButtonPressed:(id) sender
 {
-    [self stopPlayback];
+    [[SpeechManager sharedManager] stopSpeechPlayback];
 }
 
-#pragma mark - Playback Methods
-- (void) stopPlayback
+- (IBAction) closeButtonPressed:(id) sender
 {
-    if (self.synthesizer.isSpeaking)
-    {
-        [self.synthesizer stopSpeakingAtBoundary:AVSpeechBoundaryImmediate];
-    }
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end

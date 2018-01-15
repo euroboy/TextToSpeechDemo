@@ -13,6 +13,8 @@
 		D75CD4221F94F916004EA745 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = D75CD4211F94F916004EA745 /* Assets.xcassets */; };
 		D75CD4251F94F916004EA745 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = D75CD4231F94F916004EA745 /* LaunchScreen.storyboard */; };
 		D75CD4281F94F916004EA745 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = D75CD4271F94F916004EA745 /* main.m */; };
+		D78416541FB5E16300A503E1 /* SpeechToTextViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = D78416531FB5E16300A503E1 /* SpeechToTextViewController.m */; };
+		D7B33462200CB44D00E2A3C0 /* SpeechManager.m in Sources */ = {isa = PBXBuildFile; fileRef = D7B33461200CB44D00E2A3C0 /* SpeechManager.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +28,10 @@
 		D75CD4241F94F916004EA745 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		D75CD4261F94F916004EA745 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		D75CD4271F94F916004EA745 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		D78416521FB5E16300A503E1 /* SpeechToTextViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechToTextViewController.h; sourceTree = "<group>"; };
+		D78416531FB5E16300A503E1 /* SpeechToTextViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechToTextViewController.m; sourceTree = "<group>"; };
+		D7B33460200CB44D00E2A3C0 /* SpeechManager.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SpeechManager.h; sourceTree = "<group>"; };
+		D7B33461200CB44D00E2A3C0 /* SpeechManager.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SpeechManager.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,10 +64,13 @@
 		D75CD4171F94F916004EA745 /* TextToSpeechAndViceversa */ = {
 			isa = PBXGroup;
 			children = (
+				D7B3345F200CB44000E2A3C0 /* SpeechManager */,
 				D75CD4181F94F916004EA745 /* AppDelegate.h */,
 				D75CD4191F94F916004EA745 /* AppDelegate.m */,
 				D75CD41B1F94F916004EA745 /* ViewController.h */,
 				D75CD41C1F94F916004EA745 /* ViewController.m */,
+				D78416521FB5E16300A503E1 /* SpeechToTextViewController.h */,
+				D78416531FB5E16300A503E1 /* SpeechToTextViewController.m */,
 				D75CD41E1F94F916004EA745 /* Main.storyboard */,
 				D75CD4211F94F916004EA745 /* Assets.xcassets */,
 				D75CD4231F94F916004EA745 /* LaunchScreen.storyboard */,
@@ -69,6 +78,15 @@
 				D75CD4271F94F916004EA745 /* main.m */,
 			);
 			path = TextToSpeechAndViceversa;
+			sourceTree = "<group>";
+		};
+		D7B3345F200CB44000E2A3C0 /* SpeechManager */ = {
+			isa = PBXGroup;
+			children = (
+				D7B33460200CB44D00E2A3C0 /* SpeechManager.h */,
+				D7B33461200CB44D00E2A3C0 /* SpeechManager.m */,
+			);
+			path = SpeechManager;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -144,6 +162,8 @@
 			files = (
 				D75CD41D1F94F916004EA745 /* ViewController.m in Sources */,
 				D75CD4281F94F916004EA745 /* main.m in Sources */,
+				D7B33462200CB44D00E2A3C0 /* SpeechManager.m in Sources */,
+				D78416541FB5E16300A503E1 /* SpeechToTextViewController.m in Sources */,
 				D75CD41A1F94F916004EA745 /* AppDelegate.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
