@@ -31,7 +31,6 @@
         if ([[SpeechManager sharedManager] isRecordingVoice])
         {
             [[SpeechManager sharedManager] stopVoiceRecording];
-            self.speakStopButton.enabled = NO;
             [self.speakStopButton setTitle:@"SPEAK" forState:UIControlStateNormal];
         }
         else

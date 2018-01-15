@@ -45,7 +45,6 @@
     if (self)
     {
         [self loadSpeechSynthesizer];
-        [self loadSpeechRecognizer];
     }
     return self;
 }
@@ -126,16 +125,18 @@
 {
     if (@available(iOS 10.0, *))
     {
-        if (self.recognitionTask != nil)
-        {
-            [self.recognitionTask cancel];
-            _recognitionTask = nil;
-        }
+        static dispatch_once_t once = 0;
+        dispatch_once(&once, ^{
+            
+            [self loadSpeechRecognizer];
+        });
+        
+        [self stopVoiceRecording];
         
         AVAudioSession *audioSession = [AVAudioSession sharedInstance];
         @try
         {
-            [audioSession setCategory:AVAudioSessionCategoryRecord error:nil];
+            [audioSession setCategory:AVAudioSessionCategoryPlayAndRecord error:nil];
             [audioSession setMode:AVAudioSessionModeMeasurement error:nil];
             [audioSession setActive:YES withOptions:AVAudioSessionSetActiveOptionNotifyOthersOnDeactivation error:nil];
         }
@@ -173,19 +174,6 @@
                 
                 isFinal = !result.isFinal;
             }
-            
-            
-            NSLog(@"RESULT = %@      is final = %d", result.bestTranscription.formattedString, isFinal);
-            
-            
-            if (error != nil || isFinal)
-            {
-                [self.audioEngine stop];
-                [inputNode removeTapOnBus:0];
-                
-                _recognitionRequest = nil;
-                _recognitionTask = nil;
-            }
         }];
         
         AVAudioFormat *recordingFormat = [inputNode outputFormatForBus:0];
@@ -211,6 +199,17 @@
 {
     [self.audioEngine stop];
     [self.recognitionRequest endAudio];
+    AVAudioInputNode *inputNode = self.audioEngine.inputNode;
+    if (inputNode)
+    {
+        [inputNode removeTapOnBus:0];
+    }
+    _recognitionRequest = nil;
+    if (self.recognitionTask != nil)
+    {
+        [self.recognitionTask cancel];
+        _recognitionTask = nil;
+    }
 }
 
 - (BOOL) isRecordingVoice
