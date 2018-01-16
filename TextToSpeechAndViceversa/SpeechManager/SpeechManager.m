@@ -238,7 +238,11 @@
     {
         for (NSLocale *locate in [SFSpeechRecognizer supportedLocales])
         {
-            NSString *languageCode = [locate objectForKey:NSLocaleLanguageCode];
+            
+            NSLog(@"locate = %@", locate);
+            
+            
+            NSString *languageCode = [locate localeIdentifier];
             NSLog(@"%@   -   %@", [locate localizedStringForCountryCode:locate.countryCode], languageCode);
         }
     }
