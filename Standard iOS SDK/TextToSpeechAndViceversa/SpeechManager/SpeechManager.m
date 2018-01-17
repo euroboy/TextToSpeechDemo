@@ -193,22 +193,36 @@
             NSLog(@"audioEngine couldn't start because of an error");
         }
     }
+    else
+    {
+        NSString *errorDescription = @"Voice recognition is not supported by your firmware";
+        NSLog(@"VOICE RECOGNITION ERROR: %@", errorDescription);
+        NSError *notSupportedError = [NSError errorWithDomain:errorDescription code:888 userInfo:nil];
+        
+        if (completion)
+        {
+            completion(nil, notSupportedError);
+        }
+    }
 }
 
 - (void) stopVoiceRecording
 {
-    [self.audioEngine stop];
-    [self.recognitionRequest endAudio];
-    AVAudioInputNode *inputNode = self.audioEngine.inputNode;
-    if (inputNode)
+    if (@available(iOS 10.0, *))
     {
-        [inputNode removeTapOnBus:0];
-    }
-    _recognitionRequest = nil;
-    if (self.recognitionTask != nil)
-    {
-        [self.recognitionTask cancel];
-        _recognitionTask = nil;
+        [self.audioEngine stop];
+        [self.recognitionRequest endAudio];
+        AVAudioInputNode *inputNode = self.audioEngine.inputNode;
+        if (inputNode)
+        {
+            [inputNode removeTapOnBus:0];
+        }
+        _recognitionRequest = nil;
+        if (self.recognitionTask != nil)
+        {
+            [self.recognitionTask cancel];
+            _recognitionTask = nil;
+        }
     }
 }
 
@@ -238,10 +252,6 @@
     {
         for (NSLocale *locate in [SFSpeechRecognizer supportedLocales])
         {
-            
-            NSLog(@"locate = %@", locate);
-            
-            
             NSString *languageCode = [locate localeIdentifier];
             NSLog(@"%@   -   %@", [locate localizedStringForCountryCode:locate.countryCode], languageCode);
         }
